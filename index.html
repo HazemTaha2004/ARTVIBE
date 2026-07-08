@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ArtVibe — Immersive Creative Dashboard & Gallery</title>
+    <!-- Tailwind CSS for utility styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['Georgia', 'serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <!-- Custom layout and animation styles -->
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body class="bg-gray-900 text-white min-h-screen font-serif transition-colors duration-300">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full bg-gray-900/80 backdrop-blur-sm z-20 p-4 flex justify-between items-center border-b border-gray-800 transition-colors duration-300">
+      <div class="header-title text-2xl font-bold uppercase tracking-wider bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">
+        ArtVibe
+      </div>
+      <div class="flex items-center space-x-4">
+        <!-- Theme Toggle -->
+        <button
+          id="theme-toggle"
+          class="w-10 h-10 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center hover:bg-gray-700 transition-all duration-200"
+          aria-label="Toggle Theme"
+        >
+          <span class="sun text-lg">☀️</span>
+          <span class="moon text-lg hidden">🌙</span>
+        </button>
+        <!-- Profile Icon -->
+        <div class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white font-bold cursor-pointer hover:scale-105 transition-transform" title="User Profile">
+          A
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="pt-24 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Filter Controls -->
+      <nav class="controls flex justify-center mb-10 space-x-4" aria-label="Content Filters">
+        <button
+          id="all-posts"
+          class="px-6 py-2 border border-white rounded uppercase tracking-wider text-sm font-semibold transition-all hover:bg-red-600 hover:border-red-600 active-btn"
+        >
+          All Posts
+        </button>
+        <button
+          id="favorites"
+          class="px-6 py-2 border border-white rounded uppercase tracking-wider text-sm font-semibold transition-all hover:bg-red-600 hover:border-red-600"
+        >
+          Favorites
+        </button>
+      </nav>
+
+      <!-- Spotlight Hero Section -->
+      <section
+        id="spotlight"
+        class="mb-14 rounded-xl overflow-hidden shadow-2xl border border-gray-800 transition-all duration-300"
+      ></section>
+
+      <!-- Grid Content Section -->
+      <div
+        id="content"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6"
+      ></div>
+
+      <!-- Infinite Scroll Loading Status -->
+      <div
+        id="loading"
+        class="text-center py-10 text-lg font-medium opacity-0 transition-opacity duration-300"
+      >
+        <span class="loading-dots">Loading more artworks</span>
+      </div>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div
+      id="lightbox"
+      class="fixed inset-0 bg-black/95 hidden flex items-center justify-center z-50 p-4 transition-opacity duration-300"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="relative max-w-5xl max-h-[90vh] flex items-center justify-center">
+        <img
+          id="lightbox-img"
+          class="max-w-full max-h-[85vh] rounded-lg shadow-2xl object-contain border border-gray-800"
+          src=""
+          alt="Artwork Preview"
+        />
+        
+        <!-- Lightbox Actions & Details overlay -->
+        <div class="absolute bottom-4 left-4 right-4 bg-black/70 backdrop-blur-md p-4 rounded-lg flex justify-between items-center text-white">
+          <div>
+            <h3 id="lightbox-title" class="text-lg font-bold"></h3>
+            <p id="lightbox-desc" class="text-sm opacity-80"></p>
+          </div>
+        </div>
+
+        <!-- Close Button -->
+        <button
+          id="close-lightbox"
+          class="absolute -top-12 right-0 text-white hover:text-red-500 transition-colors text-3xl font-light"
+          aria-label="Close Lightbox"
+        >
+          &times;
+        </button>
+
+        <!-- Navigation Buttons -->
+        <button
+          id="prev-slide"
+          class="absolute -left-16 text-4xl text-white/70 hover:text-white transition-colors hidden md:block"
+          aria-label="Previous image"
+        >
+          &#10094;
+        </button>
+        <button
+          id="next-slide"
+          class="absolute -right-16 text-4xl text-white/70 hover:text-white transition-colors hidden md:block"
+          aria-label="Next image"
+        >
+          &#10095;
+        </button>
+      </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Application Script -->
+    <script src="./js/plugin.js"></script>
+  </body>
+</html>
